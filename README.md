@@ -48,8 +48,8 @@ There are two ways. Both produce the same app.
 
 ### A. Android Studio (standard)
 
-Open this folder in Android Studio and let it sync (it downloads Gradle 8.9 and
-the Android Gradle Plugin 8.7.3; the SDK platform 35 is fetched automatically).
+Open this folder in Android Studio and let it sync (it downloads Gradle 9.3.1 and
+the Android Gradle Plugin 9.1.0; the SDK platform 35 is fetched automatically).
 Then **Build → Build App Bundle(s) / APK(s) → Build APK(s)**, or from a terminal:
 
 ```
