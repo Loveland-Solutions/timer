@@ -1,6 +1,6 @@
 # CLAUDE.md — Tile Timer
 
-Android app: one to eight Quick Settings tiles, each a one-tap timer that works from the
+Android app (`mn.lls.tiletimer`, published under Loveland Solutions): one to eight Quick Settings tiles, each a one-tap timer that works from the
 lock screen. Target device is a Samsung Galaxy S26 (One UI 8.x, Android 16);
 development device is a Google Pixel 10a. Goal: publish on Google Play.
 
@@ -31,9 +31,12 @@ acceptance criteria and the test plan. `README.md` describes the app's behaviour
 - No new permissions without saying why in the commit message; Play reviews
   every one. `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` stays out (see handoff).
 - Keystores and `keystore.properties` are never committed. `.gitignore` covers
-  `/keystore/*.jks`; keep it that way.
+  both; keep it that way. Release builds fail without them, by design.
+- Tiles declare `ACTIVE_TILE`, so call `TimerManager.refreshTile` after any state
+  change. Do not remove it: without it, a locked tap can take over 4 seconds.
+- Screens use the system palette tokens in `values/colors.xml`, not fixed colors.
 - Strings live in `strings.xml`, never inline. English only for 1.0.
 - Versioning: `versionCode` increments by 1 per upload to Play; `versionName`
-  is semantic (1.0.0). Both live in `app/build.gradle.kts`.
+  is semantic (1.0.0). Nothing has been uploaded yet, so `versionCode` is still 1. Both live in `app/build.gradle.kts`.
 - Commit small, with messages that say what changed and what was verified on
   which device.

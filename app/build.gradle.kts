@@ -1,6 +1,10 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
 }
+
+val keystoreFile = rootProject.file("keystore.properties")
 
 android {
     namespace = "mn.lls.tiletimer"
@@ -14,15 +18,25 @@ android {
         versionName = "1.0.0"
     }
 
+    signingConfigs {
+        create("release") {
+            // Filled in from keystore.properties; see the check at the end of this file.
+            if (keystoreFile.exists()) {
+                val keystore = Properties().apply { keystoreFile.inputStream().use { load(it) } }
+                storeFile = rootProject.file(keystore.getProperty("storeFile"))
+                storePassword = keystore.getProperty("storePassword")
+                keyAlias = keystore.getProperty("keyAlias")
+                keyPassword = keystore.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
-            // Local test builds only, until Phase 2 adds the upload key.
-            if (project.hasProperty("signWithDebugKey")) {
-                signingConfig = signingConfigs.getByName("debug")
-            }
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
@@ -34,4 +48,13 @@ android {
 
 // No dependencies on purpose: plain framework APIs only, so the app stays tiny.
 dependencies {
+}
+
+// A release build without the upload key must fail clearly, not produce an unsigned file.
+gradle.taskGraph.whenReady {
+    val wantsRelease = allTasks.any { it.name in setOf("bundleRelease", "assembleRelease") }
+    if (wantsRelease && !keystoreFile.exists()) {
+        throw GradleException(
+            "Release builds need keystore.properties and keystore/upload.jks. See HANDOFF.md, Phase 2.")
+    }
 }

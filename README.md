@@ -54,6 +54,16 @@ Plugin 9.1.0, SDK platform 36). Then, from a terminal:
 # → app/build/outputs/apk/debug/app-debug.apk
 ```
 
+A release bundle needs `keystore.properties` and `keystore/upload.jks`, which are not in
+the repo:
+
+```
+./gradlew bundleRelease
+# → app/build/outputs/bundle/release/app-release.aab
+```
+
+Publishing steps are in `play/README.md`.
+
 ## How it works (for the curious)
 
 There is **no service running while a timer counts down**. Tapping a tile stores
@@ -76,11 +86,12 @@ Files:
 | `Notifications` | Channels and the countdown / ringing / info notifications |
 | `RingService` | Plays the alarm, vibrates, 5-minute give-up |
 | `RingingActivity` | Full-screen Time's up with Stop / +1 min |
+| `EdgeToEdge` | Keeps content clear of the system bars |
 | `AlarmReceiver`, `ActionReceiver`, `BootReceiver` | Alarm firing, notification buttons, reboot |
 | `MainActivity` | Durations, add-tiles button, permission checklist, test button |
 | `Prefs` | The handful of persisted values |
 
-Things Samsung might do differently that are worth a look on the first run: whether
+Things Samsung might do differently, not yet tested: whether
 the add-tiles dialog appears (fallback is manual), whether One UI shows the
 notification's +1/Cancel buttons without expanding it, and whether the tile's
 subtitle ("until 3:52 PM") is shown in the quick panel.
