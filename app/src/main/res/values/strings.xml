@@ -52,6 +52,8 @@
     <string name="desc_more">Add a timer tile</string>
     <string name="check_custom">Custom tile: pick the time each time you tap it</string>
     <string name="tile_row">Tile %1$d</string>
+    <string name="desc_row_minutes">Tile %1$d minutes</string>
+    <string name="desc_row_seconds">Tile %1$d seconds</string>
     <string name="minutes_unit">min</string>
     <string name="seconds_unit">sec</string>
     <string name="btn_save">Save</string>
@@ -66,8 +68,8 @@
     <string name="check_alarm_missing">✗ Exact alarms are off — timers may ring late</string>
     <string name="check_fsi_ok">✓ Full-screen alarm allowed</string>
     <string name="check_fsi_missing">✗ Full-screen alarm is off — the Time\'s up screen won\'t appear on the lock screen</string>
-    <string name="check_battery_ok">✓ Not battery-restricted</string>
-    <string name="check_battery_missing">✗ Battery optimization is on — allow it so Samsung doesn\'t put the app to sleep</string>
+    <string name="check_battery">For reliable alarms, open App info and set Battery to Unrestricted.</string>
+    <string name="btn_app_info">App info</string>
     <string name="btn_test">Test: ring in 5 seconds</string>
     <string name="main_footer">Tips: the alarm uses the phone\'s Alarm volume and sound. It rings through silent mode. If Do Not Disturb is on, make sure alarms are allowed in its settings.</string>
 
@@ -77,6 +79,8 @@
     <string name="custom_minutes">min</string>
     <string name="custom_seconds">sec</string>
     <string name="btn_custom_start">Start</string>
+
+    <string name="about_line">Version %1$s. No data is collected.</string>
 
     <!-- Toasts -->
     <string name="toast_custom_zero">Pick at least 1 second</string>

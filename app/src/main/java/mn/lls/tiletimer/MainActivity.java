@@ -12,7 +12,6 @@ import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
@@ -44,6 +43,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        EdgeToEdge.pad(this);
         Notifications.ensureChannels(this);
 
         durationRows = findViewById(R.id.durationRows);
@@ -130,12 +130,23 @@ public class MainActivity extends Activity {
         fixBattery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openSettings(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, true);
+                openSettings(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, true);
             }
         });
 
+        TextView about = findViewById(R.id.tvAbout);
+        about.setText(getString(R.string.about_line, versionName()));
+
         if (!hasNotificationPermission()) {
             askNotificationPermission();
+        }
+    }
+
+    private String versionName() {
+        try {
+            return getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            return "";
         }
     }
 
@@ -208,6 +219,8 @@ public class MainActivity extends Activity {
             label.setText(getString(R.string.tile_row, i + 1));
             minuteFields[i] = row.findViewById(R.id.etRowMinutes);
             secondFields[i] = row.findViewById(R.id.etRowSeconds);
+            minuteFields[i].setContentDescription(getString(R.string.desc_row_minutes, i + 1));
+            secondFields[i].setContentDescription(getString(R.string.desc_row_seconds, i + 1));
             int seconds = Prefs.seconds(this, i);
             minuteFields[i].setText(String.valueOf(seconds / 60));
             secondFields[i].setText(String.valueOf(seconds % 60));
@@ -285,13 +298,6 @@ public class MainActivity extends Activity {
         }
         tvFsi.setText(fsi ? R.string.check_fsi_ok : R.string.check_fsi_missing);
         btnFsi.setVisibility(fsi ? View.GONE : View.VISIBLE);
-
-        TextView tvBattery = findViewById(R.id.tvBattery);
-        Button btnBattery = findViewById(R.id.btnBattery);
-        PowerManager pm = getSystemService(PowerManager.class);
-        boolean unrestricted = pm.isIgnoringBatteryOptimizations(getPackageName());
-        tvBattery.setText(unrestricted ? R.string.check_battery_ok : R.string.check_battery_missing);
-        btnBattery.setVisibility(unrestricted ? View.GONE : View.VISIBLE);
     }
 
     private boolean hasNotificationPermission() {

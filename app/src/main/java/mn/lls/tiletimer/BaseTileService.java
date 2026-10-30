@@ -1,6 +1,7 @@
 package mn.lls.tiletimer;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -58,6 +59,8 @@ public abstract class BaseTileService extends TileService {
         updateTile();
     }
 
+    // The Intent overload is the only one on Android 13, the minimum version.
+    @SuppressLint("StartActivityAndCollapseDeprecated")
     @SuppressWarnings("deprecation")
     private void open(Class<?> activity) {
         Intent i = new Intent(this, activity).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

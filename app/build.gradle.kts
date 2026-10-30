@@ -4,29 +4,34 @@ plugins {
 
 android {
     namespace = "mn.lls.tiletimer"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "mn.lls.tiletimer"
         minSdk = 33          // Galaxy S26 / Pixel 10a are far above this; 33 keeps the code simple
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
+            // Local test builds only, until Phase 2 adds the upload key.
+            if (project.hasProperty("signWithDebugKey")) {
+                signingConfig = signingConfigs.getByName("debug")
+            }
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
-// No dependencies on purpose: plain framework APIs only, so the app is tiny
-// and can also be built without Gradle (see build-noide.sh).
+// No dependencies on purpose: plain framework APIs only, so the app stays tiny.
 dependencies {
 }

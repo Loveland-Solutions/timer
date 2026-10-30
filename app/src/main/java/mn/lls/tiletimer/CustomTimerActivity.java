@@ -21,6 +21,7 @@ public class CustomTimerActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom);
+        EdgeToEdge.pad(this);
 
         int last = Prefs.seconds(this, Prefs.CUSTOM_SLOT);
         hours = findViewById(R.id.pickHours);

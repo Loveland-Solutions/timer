@@ -30,6 +30,7 @@ public class RingingActivity extends Activity {
         setTurnScreenOn(true);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_ringing);
+        EdgeToEdge.pad(this);
 
         Button stop = findViewById(R.id.btnStop);
         stop.setOnClickListener(new View.OnClickListener() {

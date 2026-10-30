@@ -17,12 +17,12 @@ interaction: one swipe, one tap, no unlocking.
 - Timers are re-armed after a reboot; one that would have fired while the phone was
   off shows a "Timer missed" notification instead.
 
-No Play Store, no permissions beyond what the alarm needs, no dependencies — plain
+No permissions beyond what the alarm needs, no dependencies — plain
 Android APIs only. Requires Android 13+ (the Galaxy S26 and Pixel 10a are fine).
 
 ## Install on the phone (sideload)
 
-1. Get `TileTimer.apk` onto the phone (Quick Share, Google Drive, email it to
+1. Get `app-debug.apk` onto the phone (Quick Share, Google Drive, email it to
    yourself, or USB).
 2. Tap the file. The first time, Android asks to allow installs from that app
    (Files / Drive / Chrome) — allow it, then **Install**.
@@ -32,8 +32,8 @@ Android APIs only. Requires Android 13+ (the Galaxy S26 and Pixel 10a are fine).
      the prompts don't appear on One UI, open the quick panel, tap the pencil
      (**Edit**), and drag the three *Tile Timer* buttons in by hand — ideally into
      the first row so they're visible on the first swipe;
-   - look at **Checks** and tap **Fix** on anything marked ✗. "Full-screen alarm"
-     and "battery" are the two Samsung is most likely to flag;
+   - look at **Checks** and tap **Fix** on anything marked ✗. On Samsung, also use
+     **App info** to set Battery to Unrestricted;
    - tap **Test: ring in 5 seconds**, lock the phone, and make sure the Time's up
      screen comes up and rings.
 4. Set the three durations and **Save**.
@@ -44,41 +44,15 @@ check that alarms are allowed in its exceptions. If the phone is ever set to put
 "unused apps to sleep", add Tile Timer to the never-sleeping list (Settings →
 Battery → Background usage limits).
 
-## Building the APK
+## Building
 
-There are two ways. Both produce the same app.
-
-### A. Android Studio (standard)
-
-Open this folder in Android Studio and let it sync (it downloads Gradle 9.3.1 and
-the Android Gradle Plugin 9.1.0; the SDK platform 35 is fetched automatically).
-Then **Build → Build App Bundle(s) / APK(s) → Build APK(s)**, or from a terminal:
+Open this folder in Android Studio and let it sync (Gradle 9.3.1, Android Gradle
+Plugin 9.1.0, SDK platform 36). Then, from a terminal:
 
 ```
 ./gradlew assembleDebug
 # → app/build/outputs/apk/debug/app-debug.apk
 ```
-
-A debug build is perfectly fine to sideload. For a release build you would add a
-signing config; see B for the keystore idea.
-
-### B. Without Android Studio or Gradle
-
-Only a JDK (17+) is needed, plus four small tools fetched from GitHub:
-
-```
-tools/fetch-tools.sh     # aapt2 (from Apktool), dx.jar (from dex2jar), android.jar, uber-apk-signer
-./build-noide.sh         # → build/TileTimer.apk
-```
-
-`build-noide.sh` runs the classic pipeline by hand: `aapt2 compile/link` →
-`javac` → `dx` → zip in `classes.dex` → align + sign. On an Apple Silicon Mac the
-bundled `aapt2` is an Intel binary, so Rosetta must be installed (macOS offers it
-on first use).
-
-The first build generates `keystore/tiletimer.jks` (password `tiletimer`). Keep it:
-Android only accepts an update signed with the same key, otherwise the app has to
-be uninstalled first.
 
 ## How it works (for the curious)
 

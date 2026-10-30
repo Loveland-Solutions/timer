@@ -17,6 +17,7 @@
         android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:hint="@string/minutes_unit"
         android:importantForAutofill="no"
         android:inputType="number"
         android:maxLength="3" />
@@ -33,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:gravity="center"
+        android:hint="@string/seconds_unit"
         android:importantForAutofill="no"
         android:inputType="number"
         android:maxLength="2" />
