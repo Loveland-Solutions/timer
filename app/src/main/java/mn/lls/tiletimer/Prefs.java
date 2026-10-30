@@ -4,17 +4,22 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- * All persistent state. Three timer "slots", one per Quick Settings tile.
+ * All persistent state. One timer "slot" per Quick Settings tile: up to eight
+ * preset timers, plus the Custom tile, whose duration is the last time picked.
  *
  * Per slot:
- *   min_N  - the tile's duration in minutes (user-configurable, defaults 5/10/15)
+ *   sec_N  - the tile's duration in seconds (user-configurable)
  *   end_N  - epoch millis when the running timer ends, 0 when not running
  *   ring_N - true while the finished timer is ringing
  */
 final class Prefs {
 
-    static final int SLOTS = 3;
-    static final int[] DEFAULT_MINUTES = {5, 10, 15};
+    /** Tiles at most, Custom included; eight wide tiles fill a panel page. */
+    static final int MAX_TILES = 8;
+    static final int CUSTOM_SLOT = MAX_TILES;
+    static final int SLOTS = MAX_TILES + 1;
+    static final int[] DEFAULT_SECONDS = {300, 600, 900, 1200, 1800, 2700, 3600, 5400, 1800};
+    private static final int DEFAULT_TIMER_COUNT = 3;
 
     private static final String FILE = "tiletimer";
 
@@ -24,12 +29,24 @@ final class Prefs {
         return c.getSharedPreferences(FILE, Context.MODE_PRIVATE);
     }
 
-    static int minutes(Context c, int slot) {
-        return sp(c).getInt("min_" + slot, DEFAULT_MINUTES[slot]);
+    static int timerCount(Context c) {
+        return sp(c).getInt("timer_count", DEFAULT_TIMER_COUNT);
     }
 
-    static void setMinutes(Context c, int slot, int minutes) {
-        sp(c).edit().putInt("min_" + slot, minutes).commit();
+    static boolean customEnabled(Context c) {
+        return sp(c).getBoolean("custom_enabled", false);
+    }
+
+    static void setTileSetup(Context c, int timerCount, boolean custom) {
+        sp(c).edit().putInt("timer_count", timerCount).putBoolean("custom_enabled", custom).commit();
+    }
+
+    static int seconds(Context c, int slot) {
+        return sp(c).getInt("sec_" + slot, DEFAULT_SECONDS[slot]);
+    }
+
+    static void setSeconds(Context c, int slot, int seconds) {
+        sp(c).edit().putInt("sec_" + slot, seconds).commit();
     }
 
     static long endTime(Context c, int slot) {

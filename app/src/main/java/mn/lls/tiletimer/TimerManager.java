@@ -30,11 +30,17 @@ final class TimerManager {
 
     static final long ONE_MINUTE_MS = 60_000L;
 
+    private static final Class<?>[] TILE_CLASSES = {
+            Tile1Service.class, Tile2Service.class, Tile3Service.class, Tile4Service.class,
+            Tile5Service.class, Tile6Service.class, Tile7Service.class, Tile8Service.class,
+            TileCustomService.class
+    };
+
     private TimerManager() {}
 
     /** Start the tile's configured duration. */
     static void start(Context c, int slot) {
-        startFor(c, slot, Prefs.minutes(c, slot) * ONE_MINUTE_MS);
+        startFor(c, slot, Prefs.seconds(c, slot) * 1000L);
     }
 
     /** Start an arbitrary duration on a slot (also used by "+1 min" while ringing and the test button). */
@@ -111,7 +117,7 @@ final class TimerManager {
                 Notifications.manager(c).notify(Notifications.NOTIF_INFO_BASE + slot,
                         Notifications.info(c,
                                 c.getString(R.string.info_missed_title),
-                                c.getString(R.string.info_missed_text, Prefs.minutes(c, slot))));
+                                c.getString(R.string.info_missed_text, formatDuration(c, Prefs.seconds(c, slot)))));
             }
             refreshTile(c, slot);
         }
@@ -124,18 +130,27 @@ final class TimerManager {
     }
 
     static void refreshTile(Context c, int slot) {
+        if (!TileConfig.isEnabled(c, slot)) {
+            return;
+        }
         TileService.requestListeningState(c, new ComponentName(c, tileClass(slot)));
     }
 
     static Class<?> tileClass(int slot) {
-        switch (slot) {
-            case 0:
-                return Tile1Service.class;
-            case 1:
-                return Tile2Service.class;
-            default:
-                return Tile3Service.class;
+        return TILE_CLASSES[slot];
+    }
+
+    /** "30 sec", "5 min" or "1 min 30 sec". */
+    static String formatDuration(Context c, int seconds) {
+        int minutes = seconds / 60;
+        int rest = seconds % 60;
+        if (minutes == 0) {
+            return c.getString(R.string.duration_sec, rest);
         }
+        if (rest == 0) {
+            return c.getString(R.string.duration_min, minutes);
+        }
+        return c.getString(R.string.duration_min_sec, minutes, rest);
     }
 
     static String formatTime(Context c, long epochMillis) {

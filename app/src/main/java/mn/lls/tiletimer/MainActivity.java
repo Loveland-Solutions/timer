@@ -16,7 +16,9 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +32,13 @@ public class MainActivity extends Activity {
 
     private static final int REQ_NOTIF = 1;
 
-    private final EditText[] minuteFields = new EditText[Prefs.SLOTS];
+    private final EditText[] minuteFields = new EditText[Prefs.MAX_TILES];
+    private final EditText[] secondFields = new EditText[Prefs.MAX_TILES];
+    private LinearLayout durationRows;
+    private TextView tvTileCount;
+    private Button btnFewer;
+    private Button btnMore;
+    private CheckBox cbCustom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +46,35 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         Notifications.ensureChannels(this);
 
-        minuteFields[0] = findViewById(R.id.min1);
-        minuteFields[1] = findViewById(R.id.min2);
-        minuteFields[2] = findViewById(R.id.min3);
-        for (int i = 0; i < Prefs.SLOTS; i++) {
-            minuteFields[i].setText(String.valueOf(Prefs.minutes(this, i)));
-        }
+        durationRows = findViewById(R.id.durationRows);
+        tvTileCount = findViewById(R.id.tvTileCount);
+        btnFewer = findViewById(R.id.btnFewer);
+        btnMore = findViewById(R.id.btnMore);
+        cbCustom = findViewById(R.id.cbCustom);
+        cbCustom.setChecked(Prefs.customEnabled(this));
+        rebuildDurationRows();
+        refreshTileControls();
+
+        btnFewer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeTimerCount(-1);
+            }
+        });
+
+        btnMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeTimerCount(1);
+            }
+        });
+
+        cbCustom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setCustomTile(cbCustom.isChecked());
+            }
+        });
 
         Button save = findViewById(R.id.btnSave);
         save.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +88,7 @@ public class MainActivity extends Activity {
         addTiles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestAddTile(0);
+                requestAddTile(0, true);
             }
         });
 
@@ -117,27 +148,91 @@ public class MainActivity extends Activity {
     // ---- durations ---------------------------------------------------------
 
     private void saveDurations() {
-        for (int i = 0; i < Prefs.SLOTS; i++) {
-            int minutes;
-            try {
-                minutes = Integer.parseInt(minuteFields[i].getText().toString().trim());
-            } catch (NumberFormatException e) {
-                minutes = 0;
-            }
-            if (minutes < 1 || minutes > 999) {
-                Toast.makeText(this, getString(R.string.toast_bad_minutes, i + 1), Toast.LENGTH_LONG).show();
+        int count = Prefs.timerCount(this);
+        int[] seconds = new int[count];
+        for (int i = 0; i < count; i++) {
+            int minutes = parseField(minuteFields[i]);
+            int rest = parseField(secondFields[i]);
+            seconds[i] = minutes * 60 + rest;
+            if (minutes < 0 || minutes > 999 || rest < 0 || rest > 59 || seconds[i] < 1) {
+                Toast.makeText(this, getString(R.string.toast_bad_duration, i + 1), Toast.LENGTH_LONG).show();
                 return;
             }
-            Prefs.setMinutes(this, i, minutes);
+        }
+        for (int i = 0; i < count; i++) {
+            Prefs.setSeconds(this, i, seconds[i]);
         }
         TimerManager.refreshAllTiles(this);
         Toast.makeText(this, R.string.toast_saved, Toast.LENGTH_SHORT).show();
     }
 
+    /** An empty box counts as 0; anything unreadable as -1. */
+    private int parseField(EditText field) {
+        String text = field.getText().toString().trim();
+        if (text.isEmpty()) {
+            return 0;
+        }
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
     // ---- quick settings ----------------------------------------------------
 
-    private void requestAddTile(final int slot) {
+    private void changeTimerCount(int delta) {
+        int count = Prefs.timerCount(this) + delta;
+        TileConfig.apply(this, count, Prefs.customEnabled(this));
+        rebuildDurationRows();
+        refreshTileControls();
+        if (delta > 0) {
+            requestAddTile(count - 1, false);
+        }
+    }
+
+    private void setCustomTile(boolean on) {
+        TileConfig.apply(this, Prefs.timerCount(this), on);
+        refreshTileControls();
+        if (on) {
+            requestAddTile(Prefs.CUSTOM_SLOT, false);
+        }
+    }
+
+    private void rebuildDurationRows() {
+        durationRows.removeAllViews();
+        int count = Prefs.timerCount(this);
+        for (int i = 0; i < count; i++) {
+            View row = getLayoutInflater().inflate(R.layout.row_duration, durationRows, false);
+            TextView label = row.findViewById(R.id.tvRowLabel);
+            label.setText(getString(R.string.tile_row, i + 1));
+            minuteFields[i] = row.findViewById(R.id.etRowMinutes);
+            secondFields[i] = row.findViewById(R.id.etRowSeconds);
+            int seconds = Prefs.seconds(this, i);
+            minuteFields[i].setText(String.valueOf(seconds / 60));
+            secondFields[i].setText(String.valueOf(seconds % 60));
+            durationRows.addView(row);
+        }
+    }
+
+    private void refreshTileControls() {
+        int count = Prefs.timerCount(this);
+        boolean custom = Prefs.customEnabled(this);
+        tvTileCount.setText(String.valueOf(count));
+        btnFewer.setEnabled(count > 1);
+        btnMore.setEnabled(count + (custom ? 1 : 0) < Prefs.MAX_TILES);
+        cbCustom.setEnabled(custom || count < Prefs.MAX_TILES);
+    }
+
+    /** Offer one tile; with chain, carry on through the remaining enabled tiles. */
+    private void requestAddTile(final int slot, final boolean chain) {
         if (slot >= Prefs.SLOTS) {
+            return;
+        }
+        if (!TileConfig.isEnabled(this, slot)) {
+            if (chain) {
+                requestAddTile(slot + 1, true);
+            }
             return;
         }
         StatusBarManager sbm = getSystemService(StatusBarManager.class);
@@ -146,15 +241,23 @@ public class MainActivity extends Activity {
             return;
         }
         ComponentName tile = new ComponentName(this, TimerManager.tileClass(slot));
-        CharSequence label = getString(R.string.tile_label, Prefs.minutes(this, slot));
+        CharSequence label = slot == Prefs.CUSTOM_SLOT
+                ? getString(R.string.tile_custom_label)
+                : TimerManager.formatDuration(this, Prefs.seconds(this, slot));
         Icon icon = Icon.createWithResource(this, R.drawable.ic_timer);
-        sbm.requestAddTileService(tile, label, icon, getMainExecutor(), new Consumer<Integer>() {
-            @Override
-            public void accept(Integer result) {
-                // Whatever the answer for this one, offer the next tile.
-                requestAddTile(slot + 1);
-            }
-        });
+        try {
+            sbm.requestAddTileService(tile, label, icon, getMainExecutor(), new Consumer<Integer>() {
+                @Override
+                public void accept(Integer result) {
+                    // Whatever the answer for this one, offer the next tile.
+                    if (chain) {
+                        requestAddTile(slot + 1, true);
+                    }
+                }
+            });
+        } catch (RuntimeException e) {
+            Toast.makeText(this, R.string.toast_add_manually, Toast.LENGTH_LONG).show();
+        }
     }
 
     // ---- checks ------------------------------------------------------------

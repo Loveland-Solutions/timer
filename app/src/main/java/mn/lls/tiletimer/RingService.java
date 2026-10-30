@@ -115,11 +115,11 @@ public class RingService extends Service {
     private void onTimeout() {
         for (int slot = 0; slot < Prefs.SLOTS; slot++) {
             if (ringingSlots[slot]) {
-                int minutes = Prefs.minutes(this, slot);
+                String duration = TimerManager.formatDuration(this, Prefs.seconds(this, slot));
                 Prefs.clear(this, slot);
                 Notifications.manager(this).notify(Notifications.NOTIF_INFO_BASE + slot,
                         Notifications.info(this,
-                                getString(R.string.info_timeout_title, minutes),
+                                getString(R.string.info_timeout_title, duration),
                                 getString(R.string.info_timeout_text)));
                 RingingActivity.closeIfShowing(slot);
                 TimerManager.refreshTile(this, slot);

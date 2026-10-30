@@ -44,6 +44,16 @@
             android:theme="@style/RingTheme"
             android:turnScreenOn="true" />
 
+        <activity
+            android:name=".CustomTimerActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:showWhenLocked="true"
+            android:taskAffinity=""
+            android:theme="@style/RingTheme"
+            android:turnScreenOn="true" />
+
         <service
             android:name=".RingService"
             android:exported="false"
@@ -82,6 +92,96 @@
             android:exported="true"
             android:icon="@drawable/ic_timer"
             android:label="@string/tile3_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
+        </service>
+
+        <service
+            android:name=".Tile4Service"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/ic_timer"
+            android:label="@string/tile4_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
+        </service>
+
+        <service
+            android:name=".Tile5Service"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/ic_timer"
+            android:label="@string/tile5_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
+        </service>
+
+        <service
+            android:name=".Tile6Service"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/ic_timer"
+            android:label="@string/tile6_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
+        </service>
+
+        <service
+            android:name=".Tile7Service"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/ic_timer"
+            android:label="@string/tile7_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
+        </service>
+
+        <service
+            android:name=".Tile8Service"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/ic_timer"
+            android:label="@string/tile8_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
+        </service>
+
+        <service
+            android:name=".TileCustomService"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/ic_timer"
+            android:label="@string/tile_custom_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />

@@ -59,14 +59,14 @@ final class Notifications {
 
     /** Ongoing notification for a running timer; the system draws the countdown. */
     static Notification countdown(Context c, int slot, long end) {
-        int minutes = Prefs.minutes(c, slot);
+        String duration = TimerManager.formatDuration(c, Prefs.seconds(c, slot));
         Intent open = new Intent(c, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent openPi = PendingIntent.getActivity(c, TimerManager.REQ_OPEN_BASE + slot, open, PI_FLAGS);
 
         Notification.Builder b = new Notification.Builder(c, CH_COUNTDOWN)
                 .setSmallIcon(R.drawable.ic_timer)
                 .setColor(ACCENT)
-                .setContentTitle(c.getString(R.string.notif_countdown_title, minutes))
+                .setContentTitle(c.getString(R.string.notif_countdown_title, duration))
                 .setContentText(c.getString(R.string.notif_countdown_text, TimerManager.formatTime(c, end)))
                 .setWhen(end)
                 .setShowWhen(true)
@@ -86,7 +86,7 @@ final class Notifications {
 
     /** Full-screen "time's up" notification used by RingService while ringing. */
     static Notification ringing(Context c, int slot) {
-        int minutes = Prefs.minutes(c, slot);
+        String duration = TimerManager.formatDuration(c, Prefs.seconds(c, slot));
         Intent act = new Intent(c, RingingActivity.class)
                 .putExtra(TimerManager.EXTRA_SLOT, slot)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -97,7 +97,7 @@ final class Notifications {
                 .setSmallIcon(R.drawable.ic_timer)
                 .setColor(ACCENT)
                 .setContentTitle(c.getString(R.string.notif_ring_title))
-                .setContentText(c.getString(R.string.notif_ring_text, minutes))
+                .setContentText(c.getString(R.string.notif_ring_text, duration))
                 .setCategory(Notification.CATEGORY_ALARM)
                 .setVisibility(Notification.VISIBILITY_PUBLIC)
                 .setOngoing(true)

@@ -1,17 +1,19 @@
 # Tile Timer
 
-Three Quick Settings tiles, each one a timer. Swipe down from the top of the
+One to eight Quick Settings tiles, each one a timer. Swipe down from the top of the
 screen — **this works on the lock screen** — and tap a tile. That's the whole
 interaction: one swipe, one tap, no unlocking.
 
-- Tap an idle tile → the timer starts (defaults: 5 / 10 / 15 min; change them in the app).
+- Tap an idle tile → the timer starts (defaults: 5 / 10 / 15 min; change them in the app,
+  down to seconds, and choose how many tiles you want).
+- The optional **Custom** tile opens a picker, even on the lock screen, to set the time.
 - The running countdown is a lock-screen notification with **+1 min** and **Cancel**.
 - Tap a running tile → cancels it.
 - When time is up: a full-screen **Time's up** screen appears over the lock screen,
   the phone's alarm sound loops on the *alarm* volume (so it rings through silent
   mode), and it vibrates. **Stop** or **+1 min** on that screen or on the notification;
   tapping the tile also stops it. It gives up on its own after 5 minutes.
-- The three tiles are independent, so several timers can run at once.
+- The tiles are independent, so several timers can run at once.
 - Timers are re-armed after a reboot; one that would have fired while the phone was
   off shows a "Timer missed" notification instead.
 
@@ -93,7 +95,9 @@ Files:
 
 | File | Role |
 |---|---|
-| `BaseTileService` + `Tile1/2/3Service` | The three Quick Settings tiles |
+| `BaseTileService` + `Tile1`–`8Service`, `TileCustomService` | The Quick Settings tiles |
+| `TileConfig` | Which tiles exist; removed tiles have their service disabled |
+| `CustomTimerActivity` | The Custom tile's picker, shown over the lock screen |
 | `TimerManager` | start / cancel / extend / fire; exact alarms |
 | `Notifications` | Channels and the countdown / ringing / info notifications |
 | `RingService` | Plays the alarm, vibrates, 5-minute give-up |

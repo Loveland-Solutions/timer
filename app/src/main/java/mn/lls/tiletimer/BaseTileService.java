@@ -12,7 +12,7 @@ import android.service.quicksettings.TileService;
 /**
  * One Quick Settings tile = one timer slot.
  *
- * Tap while idle    -> start the tile's duration
+ * Tap while idle    -> start the tile's duration (Custom: ask for a time first)
  * Tap while running -> cancel
  * Tap while ringing -> stop the alarm
  *
@@ -40,7 +40,7 @@ public abstract class BaseTileService extends TileService {
             unlockAndRun(new Runnable() {
                 @Override
                 public void run() {
-                    openApp();
+                    open(MainActivity.class);
                 }
             });
             return;
@@ -50,6 +50,8 @@ public abstract class BaseTileService extends TileService {
             RingService.stop(this, slot);
         } else if (Prefs.endTime(this, slot) > 0) {
             TimerManager.cancel(this, slot);
+        } else if (slot == Prefs.CUSTOM_SLOT) {
+            open(CustomTimerActivity.class);
         } else {
             TimerManager.start(this, slot);
         }
@@ -57,8 +59,8 @@ public abstract class BaseTileService extends TileService {
     }
 
     @SuppressWarnings("deprecation")
-    private void openApp() {
-        Intent i = new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    private void open(Class<?> activity) {
+        Intent i = new Intent(this, activity).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (Build.VERSION.SDK_INT >= 34) {
             PendingIntent pi = PendingIntent.getActivity(this, 0, i,
                     PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
@@ -74,9 +76,8 @@ public abstract class BaseTileService extends TileService {
             return;
         }
         int slot = slot();
-        int minutes = Prefs.minutes(this, slot);
         tile.setIcon(Icon.createWithResource(this, R.drawable.ic_timer));
-        tile.setLabel(getString(R.string.tile_label, minutes));
+        tile.setLabel(TimerManager.formatDuration(this, Prefs.seconds(this, slot)));
 
         if (Prefs.isRinging(this, slot)) {
             tile.setState(Tile.STATE_ACTIVE);
@@ -88,6 +89,9 @@ public abstract class BaseTileService extends TileService {
                 tile.setSubtitle(getString(R.string.tile_sub_running, TimerManager.formatTime(this, end)));
             } else {
                 tile.setState(Tile.STATE_INACTIVE);
+                if (slot == Prefs.CUSTOM_SLOT) {
+                    tile.setLabel(getString(R.string.tile_custom_label));
+                }
                 tile.setSubtitle(getString(R.string.tile_sub_idle));
             }
         }

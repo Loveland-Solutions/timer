@@ -67,7 +67,8 @@ public class RingingActivity extends Activity {
         slot = intent == null ? -1 : intent.getIntExtra(TimerManager.EXTRA_SLOT, -1);
         TextView subtitle = findViewById(R.id.tvRingSubtitle);
         if (slot >= 0 && slot < Prefs.SLOTS) {
-            subtitle.setText(getString(R.string.ring_subtitle, Prefs.minutes(this, slot)));
+            subtitle.setText(getString(R.string.ring_subtitle,
+                    TimerManager.formatDuration(this, Prefs.seconds(this, slot))));
         } else {
             subtitle.setText("");
         }
