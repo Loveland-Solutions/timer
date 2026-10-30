@@ -206,6 +206,9 @@ public class MainActivity extends Activity {
             label.setText(getString(R.string.tile_row, i + 1));
             minuteFields[i] = row.findViewById(R.id.etRowMinutes);
             secondFields[i] = row.findViewById(R.id.etRowSeconds);
+            // Rows share ids, so Android must not restore them; prefs are the source of truth.
+            minuteFields[i].setSaveEnabled(false);
+            secondFields[i].setSaveEnabled(false);
             minuteFields[i].setContentDescription(getString(R.string.desc_row_minutes, i + 1));
             secondFields[i].setContentDescription(getString(R.string.desc_row_seconds, i + 1));
             int seconds = Prefs.seconds(this, i);
