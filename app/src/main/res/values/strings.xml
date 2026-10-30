@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tile Timer</string>
+
+    <!-- Tiles -->
+    <string name="tile1_label">5 min</string>
+    <string name="tile2_label">10 min</string>
+    <string name="tile3_label">15 min</string>
+    <string name="tile_label">%1$d min</string>
+    <string name="tile_sub_idle">Timer</string>
+    <string name="tile_sub_running">until %1$s</string>
+    <string name="tile_sub_ringing">Time\'s up · tap to stop</string>
+
+    <!-- Notifications -->
+    <string name="channel_countdown">Running timers</string>
+    <string name="channel_countdown_desc">Countdown shown while a timer is running</string>
+    <string name="channel_ring">Timer alarm</string>
+    <string name="channel_ring_desc">Full-screen alert when a timer finishes</string>
+    <string name="channel_info">Timer info</string>
+    <string name="notif_countdown_title">%1$d min timer</string>
+    <string name="notif_countdown_text">Ends at %1$s</string>
+    <string name="notif_ring_title">Time\'s up</string>
+    <string name="notif_ring_text">%1$d min timer finished</string>
+    <string name="action_plus_one">+1 min</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_stop">Stop</string>
+    <string name="info_missed_title">Timer missed</string>
+    <string name="info_missed_text">The %1$d min timer ended while the phone was off.</string>
+    <string name="info_timeout_title">%1$d min timer finished</string>
+    <string name="info_timeout_text">It rang for 5 minutes and stopped on its own.</string>
+
+    <!-- Ringing screen -->
+    <string name="ring_title">Time\'s up</string>
+    <string name="ring_subtitle">%1$d min timer</string>
+
+    <!-- Main screen -->
+    <string name="main_heading">Tile Timer</string>
+    <string name="main_intro">Three Quick Settings tiles, each one a timer. Swipe down from the top of the screen (works on the lock screen) and tap a tile to start it. Tap again to cancel, or to stop it ringing.</string>
+    <string name="section_durations">Tile durations</string>
+    <string name="tile_1">Tile 1</string>
+    <string name="tile_2">Tile 2</string>
+    <string name="tile_3">Tile 3</string>
+    <string name="minutes_unit">min</string>
+    <string name="btn_save">Save</string>
+    <string name="section_tiles">Quick Settings</string>
+    <string name="tiles_help">Add the tiles to your quick panel. If the button below does nothing, open the quick panel, tap the pencil (Edit), and drag the Tile Timer buttons in by hand.</string>
+    <string name="btn_add_tiles">Add tiles to Quick Settings</string>
+    <string name="section_checks">Checks</string>
+    <string name="btn_fix">Fix</string>
+    <string name="check_notif_ok">✓ Notifications allowed</string>
+    <string name="check_notif_missing">✗ Notifications are off — the countdown and alarm can\'t show</string>
+    <string name="check_alarm_ok">✓ Exact alarms allowed</string>
+    <string name="check_alarm_missing">✗ Exact alarms are off — timers may ring late</string>
+    <string name="check_fsi_ok">✓ Full-screen alarm allowed</string>
+    <string name="check_fsi_missing">✗ Full-screen alarm is off — the Time\'s up screen won\'t appear on the lock screen</string>
+    <string name="check_battery_ok">✓ Not battery-restricted</string>
+    <string name="check_battery_missing">✗ Battery optimization is on — allow it so Samsung doesn\'t put the app to sleep</string>
+    <string name="btn_test">Test: ring in 5 seconds</string>
+    <string name="main_footer">Tips: the alarm uses the phone\'s Alarm volume and sound. It rings through silent mode. If Do Not Disturb is on, make sure alarms are allowed in its settings.</string>
+
+    <!-- Toasts -->
+    <string name="toast_saved">Saved</string>
+    <string name="toast_bad_minutes">Tile %1$d: enter 1 to 999 minutes</string>
+    <string name="toast_add_manually">Open the quick panel, tap Edit, and drag the Tile Timer buttons in.</string>
+    <string name="toast_no_settings_screen">That settings screen isn\'t available on this phone.</string>
+    <string name="toast_test_busy">Tile 1 is already running — cancel it first.</string>
+    <string name="toast_test_started">Lock the phone now; it should ring in 5 seconds.</string>
+</resources>

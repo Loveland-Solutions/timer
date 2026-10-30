@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_bg">#2E7D32</color>
+    <color name="ring_bg">#0B1F12</color>
+    <color name="ring_fg">#FFFFFF</color>
+    <color name="ring_fg_dim">#B9D6BF</color>
+    <color name="ring_stop">#C62828</color>
+    <color name="ring_plus">#2E7D32</color>
+</resources>
