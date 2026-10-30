@@ -55,6 +55,6 @@ gradle.taskGraph.whenReady {
     val wantsRelease = allTasks.any { it.name in setOf("bundleRelease", "assembleRelease") }
     if (wantsRelease && !keystoreFile.exists()) {
         throw GradleException(
-            "Release builds need keystore.properties and keystore/upload.jks. See HANDOFF.md, Phase 2.")
+            "Release builds need keystore.properties and keystore/upload.jks. See play/README.md.")
     }
 }

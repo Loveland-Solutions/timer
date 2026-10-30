@@ -4,7 +4,7 @@ Android app (`mn.lls.tiletimer`, published under Loveland Solutions): one to eig
 lock screen. Target device is a Samsung Galaxy S26 (One UI 8.x, Android 16);
 development device is a Google Pixel 10a. Goal: publish on Google Play.
 
-**Start with `HANDOFF.md`.** It holds the decisions still open, the phased plan,
+**Start with `HANDOFF.md`** (kept locally, not in the public repo, along with `NOTES.md`). It holds the decisions still open, the phased plan,
 acceptance criteria and the test plan. `README.md` describes the app's behaviour.
 
 ## Stack and layout
