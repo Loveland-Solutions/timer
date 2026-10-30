@@ -4,85 +4,150 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="32dp">
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
         android:text="@string/custom_title"
-        android:textColor="@color/ring_fg"
-        android:textSize="32sp"
-        android:textStyle="bold" />
+        android:textColor="@color/lock_fg"
+        android:textSize="26sp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:gravity="center_vertical"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal">
 
-        <NumberPicker
-            android:id="@+id/pickHours"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/custom_hours" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="12dp"
-            android:text="@string/custom_hours"
-            android:textColor="@color/ring_fg_dim"
-            android:textSize="18sp" />
+            <NumberPicker
+                android:id="@+id/pickHours"
+                android:layout_width="wrap_content"
+                android:layout_height="220dp"
+                android:contentDescription="@string/custom_hours" />
 
-        <NumberPicker
-            android:id="@+id/pickMinutes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/custom_minutes" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/custom_hours_label"
+                android:textColor="@color/lock_dim"
+                android:textSize="16sp" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="12dp"
-            android:text="@string/custom_minutes"
-            android:textColor="@color/ring_fg_dim"
-            android:textSize="18sp" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <NumberPicker
-            android:id="@+id/pickSeconds"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/custom_seconds" />
+            <NumberPicker
+                android:id="@+id/pickMinutes"
+                android:layout_width="wrap_content"
+                android:layout_height="220dp"
+                android:contentDescription="@string/custom_minutes" />
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/custom_minutes_label"
+                android:textColor="@color/lock_dim"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="@string/custom_seconds"
-            android:textColor="@color/ring_fg_dim"
-            android:textSize="18sp" />
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <NumberPicker
+                android:id="@+id/pickSeconds"
+                android:layout_width="wrap_content"
+                android:layout_height="220dp"
+                android:contentDescription="@string/custom_seconds" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/custom_seconds_label"
+                android:textColor="@color/lock_dim"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/chip1"
+            style="@style/Btn.Chip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_weight="1"
+            android:tag="60"
+            android:text="@string/chip_1" />
+
+        <Button
+            android:id="@+id/chip5"
+            style="@style/Btn.Chip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:tag="300"
+            android:text="@string/chip_5" />
+
+        <Button
+            android:id="@+id/chip10"
+            style="@style/Btn.Chip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:tag="600"
+            android:text="@string/chip_10" />
+
+        <Button
+            android:id="@+id/chip30"
+            style="@style/Btn.Chip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:tag="1800"
+            android:text="@string/chip_30" />
+
     </LinearLayout>
 
     <Button
         android:id="@+id/btnCustomStart"
+        style="@style/Btn.LockPrimary"
         android:layout_width="match_parent"
-        android:layout_height="96dp"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="@color/ring_plus"
-        android:text="@string/btn_custom_start"
-        android:textColor="@color/ring_fg"
-        android:textSize="26sp"
-        android:textStyle="bold" />
+        android:layout_height="72dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/btn_custom_start" />
 
     <Button
         android:id="@+id/btnCustomCancel"
+        style="@style/Btn.LockText"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/action_cancel"
-        android:textSize="18sp" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/action_cancel" />
 
 </LinearLayout>

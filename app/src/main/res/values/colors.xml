@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="ic_launcher_bg">#2E7D32</color>
-    <color name="ring_bg">#0B1F12</color>
-    <color name="ring_fg">#FFFFFF</color>
-    <color name="ring_fg_dim">#B9D6BF</color>
-    <color name="ring_stop">#C62828</color>
-    <color name="ring_plus">#2E7D32</color>
+    <color name="surface">@android:color/system_neutral1_50</color>
+    <color name="card">@android:color/system_neutral1_10</color>
+    <color name="on_surface">@android:color/system_neutral1_900</color>
+    <color name="on_surface_variant">@android:color/system_neutral2_700</color>
+    <color name="primary">@android:color/system_accent1_600</color>
+    <color name="on_primary">@android:color/system_accent1_0</color>
+    <color name="tonal">@android:color/system_accent2_100</color>
+    <color name="on_tonal">@android:color/system_accent2_900</color>
+    <color name="field">@android:color/system_neutral2_100</color>
+    <color name="warning">#B3261E</color>
+    <color name="lock_bg">@android:color/system_neutral1_900</color>
+    <color name="lock_fg">@android:color/system_neutral1_10</color>
+    <color name="lock_dim">@android:color/system_neutral2_200</color>
+    <color name="lock_primary">@android:color/system_accent1_200</color>
+    <color name="on_lock_primary">@android:color/system_accent1_800</color>
+    <color name="lock_tonal">@android:color/system_accent2_700</color>
+    <color name="on_lock_tonal">@android:color/system_accent2_100</color>
+    <color name="ring_stop">#D32F2F</color>
 </resources>

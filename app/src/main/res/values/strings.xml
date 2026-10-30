@@ -43,50 +43,52 @@
 
     <!-- Main screen -->
     <string name="main_heading">Tile Timer</string>
-    <string name="main_intro">Quick Settings tiles, each one a timer. Swipe down from the top of the screen (works on the lock screen) and tap a tile to start it. Tap again to cancel, or to stop it ringing.</string>
-    <string name="section_durations">Tile durations</string>
-    <string name="section_count">Number of timers</string>
+    <string name="main_intro">Swipe down and tap a tile. It works on the lock screen, with no unlocking.</string>
+    <string name="section_count">Timers</string>
     <string name="btn_fewer">−</string>
     <string name="btn_more">+</string>
     <string name="desc_fewer">Remove a timer tile</string>
     <string name="desc_more">Add a timer tile</string>
-    <string name="check_custom">Custom tile: pick the time each time you tap it</string>
+    <string name="check_custom">Custom tile</string>
     <string name="tile_row">Tile %1$d</string>
     <string name="desc_row_minutes">Tile %1$d minutes</string>
     <string name="desc_row_seconds">Tile %1$d seconds</string>
     <string name="minutes_unit">min</string>
     <string name="seconds_unit">sec</string>
-    <string name="btn_save">Save</string>
-    <string name="section_tiles">Quick Settings</string>
-    <string name="tiles_help">Add the tiles to your quick panel. Choose the wide size so each tile shows its time, then tap Edit in the panel and drag them to the top. If the button below does nothing, drag the Tile Timer buttons in by hand from Edit.</string>
-    <string name="btn_add_tiles">Add tiles to Quick Settings</string>
-    <string name="section_checks">Checks</string>
+    <string name="section_tiles">Add to Quick Settings</string>
+    <string name="tiles_help">Choose the wide size so each tile shows its time, then tap Edit in the panel and drag the tiles to the top.</string>
+    <string name="btn_add_tiles">Add tiles</string>
     <string name="btn_fix">Fix</string>
-    <string name="check_notif_ok">✓ Notifications allowed</string>
-    <string name="check_notif_missing">✗ Notifications are off — the countdown and alarm can\'t show</string>
-    <string name="check_alarm_ok">✓ Exact alarms allowed</string>
-    <string name="check_alarm_missing">✗ Exact alarms are off — timers may ring late</string>
-    <string name="check_fsi_ok">✓ Full-screen alarm allowed</string>
-    <string name="check_fsi_missing">✗ Full-screen alarm is off — the Time\'s up screen won\'t appear on the lock screen</string>
-    <string name="check_battery">For reliable alarms, open App info and set Battery to Unrestricted.</string>
+    <string name="check_notif_missing">Notifications are off, so the countdown and alarm can\'t show.</string>
+    <string name="check_alarm_missing">Exact alarms are off, so timers may ring late.</string>
+    <string name="check_fsi_missing">Full-screen alarm is off, so Time\'s up won\'t appear on the lock screen.</string>
+    <string name="check_battery">If alarms ever ring late, open App info and set Battery to Unrestricted.</string>
     <string name="btn_app_info">App info</string>
     <string name="btn_test">Test: ring in 5 seconds</string>
-    <string name="main_footer">Tips: the alarm uses the phone\'s Alarm volume and sound. It rings through silent mode. If Do Not Disturb is on, make sure alarms are allowed in its settings.</string>
+    <string name="main_footer">Timers use your Alarm volume and sound, and ring through silent mode. If you use Do Not Disturb, allow alarms in its settings.</string>
 
     <!-- Custom timer screen -->
     <string name="custom_title">Set a timer</string>
-    <string name="custom_hours">hr</string>
-    <string name="custom_minutes">min</string>
-    <string name="custom_seconds">sec</string>
     <string name="btn_custom_start">Start</string>
 
     <string name="about_line">Version %1$s. No data is collected.</string>
 
+    <string name="section_setup">Finish setting up</string>
+    <string name="section_alarm">Alarm</string>
+    <string name="custom_hours">Hours</string>
+    <string name="custom_minutes">Minutes</string>
+    <string name="custom_seconds">Seconds</string>
+    <string name="custom_hours_label">hr</string>
+    <string name="custom_minutes_label">min</string>
+    <string name="custom_seconds_label">sec</string>
+    <string name="chip_1">1 min</string>
+    <string name="chip_5">5 min</string>
+    <string name="chip_10">10 min</string>
+    <string name="chip_30">30 min</string>
+
     <!-- Toasts -->
     <string name="toast_custom_zero">Pick at least 1 second</string>
-    <string name="toast_saved">Saved</string>
-    <string name="toast_bad_duration">Tile %1$d: enter a time of at least 1 second, with seconds under 60</string>
-    <string name="toast_add_manually">Open the quick panel, tap Edit, and drag the Tile Timer buttons in.</string>
+    <string name="toast_add_manually">Open the quick panel, tap Edit, and drag the Tile Timer tiles in.</string>
     <string name="toast_no_settings_screen">That settings screen isn\'t available on this phone.</string>
     <string name="toast_test_busy">Tile 1 is already running — cancel it first.</string>
     <string name="toast_test_started">Lock the phone now; it should ring in 5 seconds.</string>

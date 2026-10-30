@@ -4,44 +4,50 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="32dp">
+    android:padding="24dp">
+
+    <ImageView
+        android:id="@+id/ivRingIcon"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
+        android:background="@drawable/bg_icon_circle"
+        android:importantForAccessibility="no"
+        android:padding="26dp"
+        android:src="@drawable/ic_timer"
+        android:tint="@color/on_lock_tonal" />
 
     <TextView
         android:id="@+id/tvRingTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:fontFamily="sans-serif-medium"
         android:text="@string/ring_title"
-        android:textColor="@color/ring_fg"
-        android:textSize="48sp"
-        android:textStyle="bold" />
+        android:textColor="@color/lock_fg"
+        android:textSize="48sp" />
 
     <TextView
         android:id="@+id/tvRingSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:textColor="@color/ring_fg_dim"
-        android:textSize="24sp" />
+        android:layout_marginTop="8dp"
+        android:textColor="@color/lock_dim"
+        android:textSize="22sp" />
 
     <Button
         android:id="@+id/btnStop"
+        style="@style/Btn.Stop"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_marginTop="64dp"
-        android:backgroundTint="@color/ring_stop"
-        android:text="@string/action_stop"
-        android:textColor="@color/ring_fg"
-        android:textSize="32sp"
-        android:textStyle="bold" />
+        android:layout_height="112dp"
+        android:layout_marginTop="56dp"
+        android:text="@string/action_stop" />
 
     <Button
         android:id="@+id/btnPlusOne"
+        style="@style/Btn.LockTonal"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="@color/ring_plus"
-        android:text="@string/action_plus_one"
-        android:textColor="@color/ring_fg"
-        android:textSize="22sp" />
+        android:layout_height="68dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/action_plus_one" />
 
 </LinearLayout>

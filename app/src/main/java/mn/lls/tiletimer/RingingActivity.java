@@ -1,5 +1,8 @@
 package mn.lls.tiletimer;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +17,7 @@ public class RingingActivity extends Activity {
     private static volatile RingingActivity showing;
 
     private int slot = -1;
+    private ObjectAnimator pulse;
 
     /** Called when ringing stops from elsewhere (notification button, tile) so the screen goes away. */
     static void closeIfShowing(int slot) {
@@ -55,6 +59,24 @@ public class RingingActivity extends Activity {
         });
 
         applyIntent(getIntent());
+        startPulse();
+    }
+
+    private void startPulse() {
+        View icon = findViewById(R.id.ivRingIcon);
+        pulse = ObjectAnimator.ofPropertyValuesHolder(icon,
+                PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, 1.12f),
+                PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f, 1.12f));
+        pulse.setDuration(700L);
+        pulse.setRepeatMode(ValueAnimator.REVERSE);
+        pulse.setRepeatCount(ValueAnimator.INFINITE);
+        pulse.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        pulse.cancel();
+        super.onDestroy();
     }
 
     @Override

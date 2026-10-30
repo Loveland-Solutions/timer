@@ -32,11 +32,11 @@ Android APIs only. Requires Android 13+ (the Galaxy S26 and Pixel 10a are fine).
      the prompts don't appear on One UI, open the quick panel, tap the pencil
      (**Edit**), and drag the three *Tile Timer* buttons in by hand — ideally into
      the first row so they're visible on the first swipe;
-   - look at **Checks** and tap **Fix** on anything marked ✗. On Samsung, also use
+   - if **Finish setting up** appears, tap **Fix** on each item. On Samsung, also use
      **App info** to set Battery to Unrestricted;
    - tap **Test: ring in 5 seconds**, lock the phone, and make sure the Time's up
      screen comes up and rings.
-4. Set the three durations and **Save**.
+4. Set the durations; they save as you type.
 
 Worth knowing on Samsung: the alarm plays at the **Alarm** volume (Settings →
 Sounds and vibration → Volume), not the ringtone volume. If Do Not Disturb is used,

@@ -8,222 +8,240 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:paddingStart="16dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="24dp">
 
         <TextView
+            style="@style/Text.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/main_heading"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:layout_marginStart="4dp"
+            android:text="@string/main_heading" />
 
         <TextView
+            style="@style/Text.Body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="@string/main_intro"
-            android:textSize="15sp" />
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/main_intro" />
 
-        <!-- How many tiles -->
+        <!-- Shown only while something needs fixing -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:id="@+id/cardSetup"
+            style="@style/Card">
 
             <TextView
-                android:layout_width="0dp"
+                style="@style/Text.Section"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/section_count"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:text="@string/section_setup" />
 
-            <Button
-                android:id="@+id/btnFewer"
-                android:layout_width="56dp"
+            <LinearLayout
+                android:id="@+id/rowNotif"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/desc_fewer"
-                android:text="@string/btn_fewer" />
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvTileCount"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="18sp" />
+                <TextView
+                    style="@style/Text.Warning"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/check_notif_missing" />
 
-            <Button
-                android:id="@+id/btnMore"
-                android:layout_width="56dp"
+                <Button
+                    android:id="@+id/btnNotif"
+                    style="@style/Btn.Tonal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/btn_fix" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rowAlarm"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/desc_more"
-                android:text="@string/btn_more" />
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/Text.Warning"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/check_alarm_missing" />
+
+                <Button
+                    android:id="@+id/btnAlarm"
+                    style="@style/Btn.Tonal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/btn_fix" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rowFsi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/Text.Warning"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/check_fsi_missing" />
+
+                <Button
+                    android:id="@+id/btnFsi"
+                    style="@style/Btn.Tonal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/btn_fix" />
+            </LinearLayout>
+
         </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/cbCustom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:text="@string/check_custom" />
+        <!-- The tiles -->
+        <LinearLayout style="@style/Card">
 
-        <!-- Tile durations -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/section_durations"
-            android:textSize="17sp"
-            android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/durationRows"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
+                <TextView
+                    style="@style/Text.Section"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/section_count" />
 
-        <Button
-            android:id="@+id/btnSave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/btn_save" />
+                <Button
+                    android:id="@+id/btnFewer"
+                    style="@style/Btn.Step"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/desc_fewer"
+                    android:text="@string/btn_fewer" />
+
+                <TextView
+                    android:id="@+id/tvTileCount"
+                    style="@style/Text.Section"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" />
+
+                <Button
+                    android:id="@+id/btnMore"
+                    style="@style/Btn.Step"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/desc_more"
+                    android:text="@string/btn_more" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/durationRows"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="vertical" />
+
+            <Switch
+                android:id="@+id/cbCustom"
+                style="@style/Text.Row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:minHeight="48dp"
+                android:text="@string/check_custom" />
+        </LinearLayout>
 
         <!-- Quick Settings -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/section_tiles"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/tiles_help"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/btnAddTiles"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/btn_add_tiles" />
-
-        <!-- Checks -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/section_checks"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+        <LinearLayout style="@style/Card">
 
             <TextView
-                android:id="@+id/tvNotif"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="15sp" />
-
-            <Button
-                android:id="@+id/btnNotif"
+                style="@style/Text.Section"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_fix" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+                android:text="@string/section_tiles" />
 
             <TextView
-                android:id="@+id/tvAlarm"
-                android:layout_width="0dp"
+                style="@style/Text.Body"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="15sp" />
+                android:layout_marginTop="6dp"
+                android:text="@string/tiles_help" />
 
             <Button
-                android:id="@+id/btnAlarm"
-                android:layout_width="wrap_content"
+                android:id="@+id/btnAddTiles"
+                style="@style/Btn.Filled"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_fix" />
+                android:layout_marginTop="16dp"
+                android:text="@string/btn_add_tiles" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+        <!-- Alarm -->
+        <LinearLayout style="@style/Card">
 
             <TextView
-                android:id="@+id/tvFsi"
-                android:layout_width="0dp"
+                style="@style/Text.Section"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="15sp" />
+                android:text="@string/section_alarm" />
+
+            <TextView
+                style="@style/Text.Body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/main_footer" />
 
             <Button
-                android:id="@+id/btnFsi"
-                android:layout_width="wrap_content"
+                android:id="@+id/btnTest"
+                style="@style/Btn.Tonal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_fix" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+                android:layout_marginTop="16dp"
+                android:text="@string/btn_test" />
 
             <TextView
-                android:id="@+id/tvBattery"
-                android:layout_width="0dp"
+                style="@style/Text.Body"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/check_battery"
-                android:textSize="15sp" />
+                android:layout_marginTop="16dp"
+                android:text="@string/check_battery" />
 
             <Button
                 android:id="@+id/btnBattery"
-                android:layout_width="wrap_content"
+                style="@style/Btn.Tonal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:text="@string/btn_app_info" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnTest"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/btn_test" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/main_footer"
-            android:textSize="13sp" />
-
         <TextView
             android:id="@+id/tvAbout"
+            style="@style/Text.Body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
             android:textSize="13sp" />
 
     </LinearLayout>

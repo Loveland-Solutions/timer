@@ -13,11 +13,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +39,7 @@ public class MainActivity extends Activity {
     private TextView tvTileCount;
     private Button btnFewer;
     private Button btnMore;
-    private CheckBox cbCustom;
+    private Switch cbCustom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,14 +75,6 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 setCustomTile(cbCustom.isChecked());
-            }
-        });
-
-        Button save = findViewById(R.id.btnSave);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveDurations();
             }
         });
 
@@ -158,23 +152,16 @@ public class MainActivity extends Activity {
 
     // ---- durations ---------------------------------------------------------
 
-    private void saveDurations() {
-        int count = Prefs.timerCount(this);
-        int[] seconds = new int[count];
-        for (int i = 0; i < count; i++) {
-            int minutes = parseField(minuteFields[i]);
-            int rest = parseField(secondFields[i]);
-            seconds[i] = minutes * 60 + rest;
-            if (minutes < 0 || minutes > 999 || rest < 0 || rest > 59 || seconds[i] < 1) {
-                Toast.makeText(this, getString(R.string.toast_bad_duration, i + 1), Toast.LENGTH_LONG).show();
-                return;
-            }
+    /** Durations save as they are typed; a time that isn't valid is simply not kept. */
+    private void saveDuration(int i) {
+        int minutes = parseField(minuteFields[i]);
+        int rest = parseField(secondFields[i]);
+        int seconds = minutes * 60 + rest;
+        if (minutes < 0 || minutes > 999 || rest < 0 || rest > 59 || seconds < 1) {
+            return;
         }
-        for (int i = 0; i < count; i++) {
-            Prefs.setSeconds(this, i, seconds[i]);
-        }
-        TimerManager.refreshAllTiles(this);
-        Toast.makeText(this, R.string.toast_saved, Toast.LENGTH_SHORT).show();
+        Prefs.setSeconds(this, i, seconds);
+        TimerManager.refreshTile(this, i);
     }
 
     /** An empty box counts as 0; anything unreadable as -1. */
@@ -224,6 +211,23 @@ public class MainActivity extends Activity {
             int seconds = Prefs.seconds(this, i);
             minuteFields[i].setText(String.valueOf(seconds / 60));
             secondFields[i].setText(String.valueOf(seconds % 60));
+            final int index = i;
+            TextWatcher saver = new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    saveDuration(index);
+                }
+            };
+            minuteFields[i].addTextChangedListener(saver);
+            secondFields[i].addTextChangedListener(saver);
             durationRows.addView(row);
         }
     }
@@ -276,28 +280,16 @@ public class MainActivity extends Activity {
     // ---- checks ------------------------------------------------------------
 
     private void refreshChecks() {
-        TextView tvNotif = findViewById(R.id.tvNotif);
-        Button btnNotif = findViewById(R.id.btnNotif);
         boolean notif = hasNotificationPermission();
-        tvNotif.setText(notif ? R.string.check_notif_ok : R.string.check_notif_missing);
-        btnNotif.setVisibility(notif ? View.GONE : View.VISIBLE);
-
-        TextView tvAlarm = findViewById(R.id.tvAlarm);
-        Button btnAlarm = findViewById(R.id.btnAlarm);
-        AlarmManager am = getSystemService(AlarmManager.class);
-        boolean exact = am.canScheduleExactAlarms();
-        tvAlarm.setText(exact ? R.string.check_alarm_ok : R.string.check_alarm_missing);
-        btnAlarm.setVisibility(exact ? View.GONE : View.VISIBLE);
-
-        TextView tvFsi = findViewById(R.id.tvFsi);
-        Button btnFsi = findViewById(R.id.btnFsi);
+        boolean exact = getSystemService(AlarmManager.class).canScheduleExactAlarms();
         boolean fsi = true;
         if (Build.VERSION.SDK_INT >= 34) {
-            NotificationManager nm = getSystemService(NotificationManager.class);
-            fsi = nm.canUseFullScreenIntent();
+            fsi = getSystemService(NotificationManager.class).canUseFullScreenIntent();
         }
-        tvFsi.setText(fsi ? R.string.check_fsi_ok : R.string.check_fsi_missing);
-        btnFsi.setVisibility(fsi ? View.GONE : View.VISIBLE);
+        findViewById(R.id.rowNotif).setVisibility(notif ? View.GONE : View.VISIBLE);
+        findViewById(R.id.rowAlarm).setVisibility(exact ? View.GONE : View.VISIBLE);
+        findViewById(R.id.rowFsi).setVisibility(fsi ? View.GONE : View.VISIBLE);
+        findViewById(R.id.cardSetup).setVisibility(notif && exact && fsi ? View.GONE : View.VISIBLE);
     }
 
     private boolean hasNotificationPermission() {
