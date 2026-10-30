@@ -71,6 +71,8 @@
     <string name="custom_title">Set a timer</string>
     <string name="btn_custom_start">Start</string>
 
+    <string name="about_privacy">Privacy policy</string>
+    <string name="privacy_url" translatable="false">https://loveland-solutions.github.io/timer/play/privacy-policy.html</string>
     <string name="about_line">Version %1$s. No data is collected.</string>
 
     <string name="section_setup">Finish setting up</string>

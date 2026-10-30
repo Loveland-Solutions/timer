@@ -37,6 +37,6 @@ acceptance criteria and the test plan. `README.md` describes the app's behaviour
 - Screens use the system palette tokens in `values/colors.xml`, not fixed colors.
 - Strings live in `strings.xml`, never inline. English only for 1.0.
 - Versioning: `versionCode` increments by 1 per upload to Play; `versionName`
-  is semantic (1.0.0). Nothing has been uploaded yet, so `versionCode` is still 1. Both live in `app/build.gradle.kts`.
+  is semantic (1.0.0). The privacy policy is served from this repo by GitHub Pages. Both live in `app/build.gradle.kts`.
 - Commit small, with messages that say what changed and what was verified on
   which device.

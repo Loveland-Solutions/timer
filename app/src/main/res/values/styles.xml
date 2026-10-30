@@ -30,6 +30,12 @@
         <item name="android:textColor">@color/on_primary</item>
     </style>
 
+    <style name="Btn.Text" parent="Btn">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="Btn.Tonal" parent="Btn">
         <item name="android:background">@drawable/bg_tonal</item>
         <item name="android:textColor">@color/on_tonal</item>

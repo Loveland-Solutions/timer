@@ -1,6 +1,6 @@
 # Play Console answers (App content)
 
-**Privacy policy URL:** [PRIVACY POLICY URL]
+**Privacy policy URL:** https://loveland-solutions.github.io/timer/play/privacy-policy.html
 
 **Ads:** No.
 

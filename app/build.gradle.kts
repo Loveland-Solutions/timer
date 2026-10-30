@@ -14,7 +14,7 @@ android {
         applicationId = "mn.lls.tiletimer"
         minSdk = 33          // Galaxy S26 / Pixel 10a are far above this; 33 keeps the code simple
         targetSdk = 36
-        versionCode = 1
+        versionCode = 2
         versionName = "1.0.0"
     }
 

@@ -131,8 +131,24 @@ public class MainActivity extends Activity {
         TextView about = findViewById(R.id.tvAbout);
         about.setText(getString(R.string.about_line, versionName()));
 
+        Button privacy = findViewById(R.id.btnPrivacy);
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPrivacyPolicy();
+            }
+        });
+
         if (!hasNotificationPermission()) {
             askNotificationPermission();
+        }
+    }
+
+    private void openPrivacyPolicy() {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.privacy_url))));
+        } catch (RuntimeException e) {
+            Toast.makeText(this, R.string.privacy_url, Toast.LENGTH_LONG).show();
         }
     }
 

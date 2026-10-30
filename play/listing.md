@@ -24,6 +24,8 @@ Long-press a tile to open settings.
 
 First release: one-tap timers in Quick Settings, from one to eight tiles, plus a Custom tile.
 
+**Website:** https://lls.mn/en/. **Contact email:** tom@lls.mn.
+
 **Category:** Tools. **Price:** Free. **Default language:** en-US.
 
 **Graphics:** `assets/icon-512.png`, `assets/feature-graphic.png`, and the five images in
