@@ -17,7 +17,7 @@
     <string name="duration_min_sec">%1$d min %2$d sec</string>
     <string name="tile_sub_idle">Timer</string>
     <string name="tile_sub_running">until %1$s</string>
-    <string name="tile_sub_ringing">Time\'s up · tap to stop</string>
+    <string name="tile_sub_ringing">Tap to stop</string>
 
     <!-- Notifications -->
     <string name="channel_countdown">Running timers</string>
