@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.loveland.tiletimer"
+    namespace = "mn.lls.tiletimer"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.loveland.tiletimer"
+        applicationId = "mn.lls.tiletimer"
         minSdk = 33          // Galaxy S26 / Pixel 10a are far above this; 33 keeps the code simple
         targetSdk = 35
         versionCode = 1

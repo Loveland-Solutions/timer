@@ -12,7 +12,7 @@ and the no-IDE build path (optional once Android Studio works).
 - Plain Java, framework APIs only, **no third-party dependencies** unless the
   handoff says otherwise. Keep it that way; the app's whole value is that it is
   tiny, fast and has nothing to break.
-- `app/src/main/java/com/loveland/tiletimer/` — all code (12 small classes; the
+- `app/src/main/java/mn/lls/tiletimer/` — all code (12 small classes; the
   table in `README.md` says what each does).
 - `app/src/main/res/` — layouts, strings, vector icons. No PNGs except what the
   store listing needs.

@@ -1,4 +1,4 @@
-package com.loveland.tiletimer;
+package mn.lls.tiletimer;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.content.Intent;
 /** Target of the exact alarm: a timer just reached zero. */
 public class AlarmReceiver extends BroadcastReceiver {
 
-    static final String ACTION_FIRE = "com.loveland.tiletimer.FIRE";
+    static final String ACTION_FIRE = "mn.lls.tiletimer.FIRE";
 
     @Override
     public void onReceive(Context context, Intent intent) {

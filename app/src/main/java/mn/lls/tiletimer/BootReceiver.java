@@ -1,4 +1,4 @@
-package com.loveland.tiletimer;
+package mn.lls.tiletimer;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

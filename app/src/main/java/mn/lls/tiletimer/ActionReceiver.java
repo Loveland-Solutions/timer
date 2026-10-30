@@ -1,4 +1,4 @@
-package com.loveland.tiletimer;
+package mn.lls.tiletimer;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,9 +7,9 @@ import android.content.Intent;
 /** Notification action buttons: Cancel, +1 min, Stop. */
 public class ActionReceiver extends BroadcastReceiver {
 
-    static final String ACTION_CANCEL = "com.loveland.tiletimer.CANCEL";
-    static final String ACTION_PLUS = "com.loveland.tiletimer.PLUS";
-    static final String ACTION_STOP_RING = "com.loveland.tiletimer.STOP_RING";
+    static final String ACTION_CANCEL = "mn.lls.tiletimer.CANCEL";
+    static final String ACTION_PLUS = "mn.lls.tiletimer.PLUS";
+    static final String ACTION_STOP_RING = "mn.lls.tiletimer.STOP_RING";
 
     @Override
     public void onReceive(Context context, Intent intent) {

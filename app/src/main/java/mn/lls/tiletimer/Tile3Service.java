@@ -1,4 +1,4 @@
-package com.loveland.tiletimer;
+package mn.lls.tiletimer;
 
 /** Quick Settings tile #3. */
 public class Tile3Service extends BaseTileService {

@@ -24,7 +24,7 @@ KEYSTORE="${KEYSTORE:-$ROOT/keystore/tiletimer.jks}"
 KS_ALIAS="${KS_ALIAS:-tiletimer}"
 KS_PASS="${KS_PASS:-tiletimer}"
 
-PKG="com.loveland.tiletimer"
+PKG="mn.lls.tiletimer"
 MIN_SDK=33
 TARGET_SDK=35
 VERSION_CODE="${VERSION_CODE:-1}"
