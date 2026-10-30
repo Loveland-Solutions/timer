@@ -4,6 +4,6 @@ Tile Timer does not collect, store, or transmit any personal data. It has no int
 
 The only information it keeps is on your device: the times you set and the end time of a running timer. Uninstalling the app removes them.
 
-Contact: tom@lls.mn
+Contact: contact@lls.mn
 
 Loveland Solutions, https://lls.mn/en/
